@@ -1,6 +1,6 @@
 # Hazelcast User Group, London
 
-Code resources & slides accompanying the "Spring Boot" talk, 30th March 2016
+Code resources accompanying the "Spring Boot" talk, 30th March 2016
 
 #### Instructions
 There are three variations of the server module, and one of the client module.
