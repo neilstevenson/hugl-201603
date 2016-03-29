@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,7 +38,11 @@ public class Server implements CommandLineRunner {
 	}
 
 	@Autowired
-	private HazelcastInstance hazelcastInstance;
+	@Qualifier("server1")
+	private HazelcastInstance server1;
+
+	@Resource(name="server2")
+	private HazelcastInstance server2;
 
 	private enum Command {
 		ADD, QUIT,
@@ -93,7 +100,7 @@ public class Server implements CommandLineRunner {
 	 * @param payload Text to add
 	 */
 	private void add(String payload) {
-		IQueue<String> iQueue = this.hazelcastInstance.getQueue("default");
+		IQueue<String> iQueue = this.server1.getQueue("default");
 
 		System.out.println("Queue '" + iQueue.getName() + "' add '" + payload + "'");
 		
@@ -104,7 +111,7 @@ public class Server implements CommandLineRunner {
 	 * <P>List the available commands.</P>
 	 */
 	private void banner() {
-		System.out.println("================ " + this.hazelcastInstance.getName() + " ================");
+		System.out.println("================ " + this.server1.getName() + " ================");
 		System.out.println(Arrays.asList(Command.values()));
 	}
 }

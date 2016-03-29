@@ -36,6 +36,5 @@
 		<module>server-simple</module>
 		<module>server-simpler</module>
 		<module>server-simplest</module>
-		<module>doc</module>
 	</modules>
 </project>

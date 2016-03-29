@@ -1,5 +1,8 @@
 package neil.demo.hugl201603;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +18,8 @@ import com.hazelcast.core.IQueue;
  */
 @RestController
 public class MyController {
-
+	private static final Logger log = LoggerFactory.getLogger(MyController.class);
+	
 	@Autowired
 	private HazelcastInstance hazelcastInstance;
 	
@@ -36,6 +40,9 @@ public class MyController {
 		IQueue<String> iQueue = this.hazelcastInstance.getQueue("default");
 		
 		String s = iQueue.poll();
+		
+		log.info("Poll '{}' got '{}'", iQueue.getName(), s);
+		
 		if (s == null) {
 			return "_empty_";
 		} else {

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.TcpIpConfig;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 
 /**
  * <P>A configuration class, defining some Spring beans for this
@@ -27,10 +29,6 @@ public class MyConfiguration {
 	/**
 	 * <P>Define the Hazelcast config as a bean, multicast off, TCP on.
 	 * </P>
-	 * <P>The existance of this bean triggers Spring Boot to create
-	 * a Hazelcast instance, and to make this Hazelcast instance
-	 * available as a bean also.
-	 * </P>
 	 * 
 	 * @return Hazelcast config
 	 */
@@ -45,6 +43,32 @@ public class MyConfiguration {
 		tcpIpConfig.setMembers(Arrays.asList(this.host));
 		
 		return config;
+	}
+
+	/**
+	 * <P>Create a Hazelcast instance manually. Spring Boot won't
+	 * make one if one already is created explicitly.
+	 * </P>
+	 * 
+	 * @param config Same config for both
+	 * @return A first Hazelcast server
+	 */
+	@Bean(name="server1")
+	public HazelcastInstance server1(Config config) {
+		return Hazelcast.newHazelcastInstance(config);
+	}
+
+	/**
+	 * <P>Create a second Hazelcast instance manually in this JVM,
+	 * using the same config for both.
+	 * </P>
+	 * 
+	 * @param config Same config for both
+	 * @return A second Hazelcast server
+	 */
+	@Bean(name="server2")
+	public HazelcastInstance server2(Config config) {
+		return Hazelcast.newHazelcastInstance(config);
 	}
 	
 	/**
