@@ -1,0 +1,10 @@
+# Active shutdown URL, for HTTP POST only
+endpoints.shutdown.enabled: true
+
+
+logging.level:
+  com.hazelcast:  info
+  org.springframework:  error
+  org.springframework.boot:  info
+  org.springframework.web:  error
+  

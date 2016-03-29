@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>neil.demo.hugl201603</groupId>
+		<artifactId>pom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	
+	<artifactId>server-simpler</artifactId>
+	
+	<dependencies>
+		<!-- <artifactId>spring-boot-starter-web</artifactId> turns the
+			standalone Jar into a web application.
+			 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- <artifactId>spring-boot-starter-actuator</artifactId> is an
+		    optional web extension that makes certain useful URLs available.
+		    eg.
+			http://localhost:8080/beans
+			http://localhost:8080/health
+			http://localhost:8080/info
+			http://localhost:8080/shutdown   /*HTTP POST*/
+		 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+		
+			<!-- Convert the Jar into an executable Jar -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
